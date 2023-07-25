@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 
+
+
 function Square({value, onSquareClick}) {
 
   return (
@@ -13,7 +15,8 @@ function Square({value, onSquareClick}) {
 
 function Board({xIsNext, squares, onPlay}) {
 
-  function handlecClick(i) {
+
+  function handleClick(i) {
     if ( calculateWinner(squares) || squares[i]){
       return;
     }
@@ -27,6 +30,24 @@ function Board({xIsNext, squares, onPlay}) {
     onPlay(nextSquares);
   }
 
+
+  const rows = [];
+
+  for (let j = 0; j < 9; j+=3) {
+      rows.push (
+        <React.Fragment>
+        <div className="board-row">
+          <Square value= {squares[j]} onSquareClick= {() => handleClick(j)}/>
+          <Square value= {squares[j+1]} onSquareClick= {() => handleClick(j+1)}/>
+          <Square value= {squares[j+2]} onSquareClick= {() => handleClick(j+2)}/>
+        </div>
+        </React.Fragment>
+        
+    );
+  }
+
+
+
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
@@ -35,27 +56,37 @@ function Board({xIsNext, squares, onPlay}) {
     status = "Next Player: " + (xIsNext ? "X" : "O");
   }
 
-  return(
+  return (
     <React.Fragment>
-      <div className='status'>{status}</div>
-      <div className='board-row'>
-        <Square value = {squares[0]} onSquareClick={() => handlecClick(0)} />
-        <Square value = {squares[1]} onSquareClick={() => handlecClick(1)}/>
-        <Square value = {squares[2]} onSquareClick={() => handlecClick(2)}/>
-      </div>
-      <div className='board-row'>
-        <Square value = {squares[3]} onSquareClick={() => handlecClick(3)}/>
-        <Square value = {squares[4]} onSquareClick={() => handlecClick(4)}/>
-        <Square value = {squares[5]} onSquareClick={() => handlecClick(5)}/>
-      </div>
-      <div className='board-row'>
-        <Square value = {squares[6]} onSquareClick={() => handlecClick(6)}/>
-        <Square value = {squares[7]} onSquareClick={() => handlecClick(7)}/>
-        <Square value = {squares[8]} onSquareClick={() => handlecClick(8)}/>
-      </div>
+      <div className="status">{status}</div>
+      <div>{rows}</div>
     </React.Fragment>
+  )
+
+  //USED LOOPS TO GENERATE THE REPORT.
+  // return(
+  //   <React.Fragment>
+  //     <div className='status'>{status}</div>
+  //     <div className='board-row'>
+  //       <Square value = {squares[0]} onSquareClick={() => (0)} />
+  //       <Square value = {squares[1]} onSquareClick={() => (1)}/>
+  //       <Square value = {squares[2]} onSquareClick={() => (2)}/>
+  //     </div>
+  //     <div className='board-row'>
+  //       <Square value = {squares[3]} onSquareClick={() => (3)}/>
+  //       <Square value = {squares[4]} onSquareClick={() => (4)}/>
+  //       <Square value = {squares[5]} onSquareClick={() => (5)}/>
+  //     </div>
+  //     <div className='board-row'>
+  //       <Square value = {squares[6]} onSquareClick={() => (6)}/>
+  //       <Square value = {squares[7]} onSquareClick={() => (7)}/>
+  //       <Square value = {squares[8]} onSquareClick={() => (8)}/>
+  //     </div>
+  //   </React.Fragment>
   
-  );
+  // );
+
+
 }
 
 
@@ -77,10 +108,13 @@ export default function Game() {
 
   const moves = history.map((square,move) => {
     let description;
-    if (move > 0) {
-      description = 'Go to move #' + move;
-    } else {
-      description = 'Go to game start';
+    if (move == currentMove) {
+      description = 'You are at move # ' + move;
+      return ( <li key = {move}>{description}</li>)
+    } else if (move > 0) {
+      description = 'Go to move # '+ move;
+    }else{
+      description = 'Go to game start!'
     }
     return (
       <li key={move}>
