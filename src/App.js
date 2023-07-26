@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import Toggle from 'react-toggle'
 
 
 
@@ -10,6 +11,20 @@ function Square({value, onSquareClick}) {
       {value}
     </button>
     );
+}
+
+function ToggleButton ({isToggled,moves}) {
+
+  const handleToggle = () => {
+    setIsToggled(!isToggled);
+    moves.reverse();
+  }
+
+  return (
+    <React.Fragment>
+      <Toggle checked={isToggled} defaultChecked= 'false' onChange={handleToggle}/>
+    </React.Fragment>
+  )
 }
 
 
