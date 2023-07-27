@@ -78,28 +78,6 @@ function Board({xIsNext, squares, onPlay}) {
     </React.Fragment>
   )
 
-  //USED LOOPS TO GENERATE THE REPORT.
-  // return(
-  //   <React.Fragment>
-  //     <div className='status'>{status}</div>
-  //     <div className='board-row'>
-  //       <Square value = {squares[0]} onSquareClick={() => (0)} />
-  //       <Square value = {squares[1]} onSquareClick={() => (1)}/>
-  //       <Square value = {squares[2]} onSquareClick={() => (2)}/>
-  //     </div>
-  //     <div className='board-row'>
-  //       <Square value = {squares[3]} onSquareClick={() => (3)}/>
-  //       <Square value = {squares[4]} onSquareClick={() => (4)}/>
-  //       <Square value = {squares[5]} onSquareClick={() => (5)}/>
-  //     </div>
-  //     <div className='board-row'>
-  //       <Square value = {squares[6]} onSquareClick={() => (6)}/>
-  //       <Square value = {squares[7]} onSquareClick={() => (7)}/>
-  //       <Square value = {squares[8]} onSquareClick={() => (8)}/>
-  //     </div>
-  //   </React.Fragment>
-  
-  // );
 
 
 }
